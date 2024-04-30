@@ -3,29 +3,42 @@
 import exp from 'constants'
 import sql from './db'
 
-export async function insert(info){
-    return await sql`INSERT INTO players (name, age, profession, hometown) VALUES (${info.name}, ${info.age}, ${info.profession}, ${info.hometown})`
+export async function insert(info) {
+    return await sql`INSERT INTO assets
+     (id, code, name, descripition, location, incialValue, finalValue, percentage)
+     VALUES (
+             ${info.id},
+             ${info.code},
+             ${info.name},
+             ${info.descripition},
+             ${info.location},
+             ${info.inicialValue},
+             ${info.finalValue},
+             ${info.percentage})`
 }
 
-export async function select(){
-    return await sql`SELECT * FROM players`
+export async function select() {
+    return await sql`SELECT * FROM assets`
 }
 
-export async function remove(id){
-    return await sql`DELETE FROM players WHERE id = ${id}`
+export async function remove(id) {
+    return await sql`DELETE FROM assets WHERE id = ${id}`
 }
 
-export async function update(player){
-    if (player.id !== undefined && player.name !== undefined && player.age !== undefined && player.profession !== undefined) {
-    console.log(player)
-    return await sql`UPDATE players SET 
-    name = ${player.name},
-    age = ${player.age},
-    profession = ${player.profession},
-    hometown = ${player.hometown}
-    WHERE id = ${player.id}`
-    }else {
+export async function update(asset) {
+    if (asset.id !== undefined && asset.name !== undefined && asset.age !== undefined && asset.profession !== undefined) {
+        console.log(asset)
+        return await sql`UPDATE assets SET 
+    code = ${asset.code}
+    name = ${asset.name},
+    descripition = ${asset.descripition},
+    location = ${asset.location},
+    inicialValue = ${asset.inicialValue},
+    finalValue = ${asset.inicialValue},
+    percentage = ${asset.percentage}
+    WHERE npm riid = ${asset.id}`
+    } else {
         // Se algum campo estiver faltando, lança um erro
-        throw new Error('Campos de jogador incompletos');
-      }
+        throw new Error('Campos de patrimonio incompletos');
+    }
 }

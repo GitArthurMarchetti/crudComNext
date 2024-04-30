@@ -15,19 +15,19 @@ import {
 } from "@/components/ui/sheet"
 import { useState } from "react"
 
-import { IPlayer, defaultModal } from "../types"
+import { IAssets, defaultModal } from "../types"
 
-interface PlayerModalProps {
-  player: IPlayer,
-  update: (fish:IPlayer) => void
+interface AssetModalProps {
+  asset: IAssets,
+  update: (asset:IAssets) => void
 }
 
-export default function MySheet(props: PlayerModalProps) {
-  const [playerData, setPlayer] = useState<IPlayer>(props.player);
+export default function MySheet(props: AssetModalProps) {
+  const [assetData, setAsset] = useState<IAssets>(props.asset);
  
 
-  const handleChange = (field: keyof IPlayer, value: string | number) => {
-    setPlayer({ ...playerData, [field]: value });
+  const handleChange = (field: keyof IAssets, value: string | number) => {
+    setAsset({ ...assetData, [field]: value });
   };
 
     return(
@@ -42,38 +42,59 @@ export default function MySheet(props: PlayerModalProps) {
         </SheetHeader>
         <div className="grid gap-4 py-4">
 
+        <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="code" className="text-right">
+              Código
+            </Label>
+            <Input id="code" value={assetData.code} className="col-span-3"  onChange={(e) => handleChange('code', Number(e.target.value))}/>
+          </div>
+
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Nome
             </Label>
-            <Input id="name" value={playerData.name} className="col-span-3"   onChange={(e) => handleChange('name', e.target.value)}/>
+            <Input id="name" value={assetData.name} className="col-span-3"   onChange={(e) => handleChange('name', e.target.value)}/>
+          </div>
+n
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="descripition" className="text-right">
+              Descripition
+            </Label>
+            <Input id="descripition" value={assetData.descripition} className="col-span-3" onChange={(e) => handleChange('descripition', e.target.value)}/>
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="age" className="text-right">
-              Ano
+            <Label htmlFor="location" className="text-right">
+              Localização
             </Label>
-            <Input id="age" value={playerData.age} className="col-span-3" onChange={(e) => handleChange('age', Number(e.target.value))}/>
+            <Input id="location"  value={assetData.location} className="col-span-3"  onChange={(e) => handleChange('location', e.target.value)}/>
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="profession" className="text-right">
-              Profissão
+            <Label htmlFor="finalValue" className="text-right">
+              Valor Inicial
             </Label>
-            <Input id="profession"  value={playerData.profession} className="col-span-3"  onChange={(e) => handleChange('profession', e.target.value)}/>
+            <Input id="finalValue"  value={assetData.finalValue} className="col-span-3"  onChange={(e) => handleChange('finalValue', Number(e.target.value))}/>
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Cidade natal
+            <Label htmlFor="finalValue" className="text-right">
+              Valor Final
             </Label>
-            <Input id="username"  value={playerData.hometown} className="col-span-3"  onChange={(e) => handleChange('hometown', e.target.value)}/>
+            <Input id="finalValue"  value={assetData.finalValue} className="col-span-3"  onChange={(e) => handleChange('finalValue', Number(e.target.value))}/>
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="percentage" className="text-right">
+              Porcentagem de desvalorização
+            </Label>
+            <Input id="percentage"  value={assetData.percentage} className="col-span-3" maxLength={100} onChange={(e) => handleChange('percentage', Number(e.target.value))}/>
           </div>
 
         </div>
         <SheetFooter>
           <SheetClose asChild>
-          <Button type="submit" onClick={() => props.update(playerData)}>Salvar</Button>
+          <Button type="submit" onClick={() => props.update(assetData)}>Salvar</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

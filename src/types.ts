@@ -1,9 +1,12 @@
-export interface IPlayer{
+export interface IAssets{
     id: number,
+    code: number,
     name: string,
-    age: number,
-    profession: string,
-    hometown: string,
+    descripition: string,
+    location: string,
+    inicialValue: number,
+    finalValue: number,
+    percentage: number
 }
 
 export const defaultModal = {
